@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicio Cloud - Gabriel Ventura | ITLA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .cloud-icon {
+            font-size: 4em;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            animation: slideIn 0.6s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .stat-box:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px) rotate(2deg);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-list li:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(10px);
+            padding-left: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+        
+        .btn:active {
+            transform: translateY(0px) scale(0.98);
+        }
+        
+        h2 {
+            color: #ffd700;
+            margin: 20px 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h3 {
+            color: #4facfe;
+            margin: 15px 0 10px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            border: 1px solid #ffd700;
+        }
+        
+        .profesor-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            border-left: 5px solid #ffd700;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            animation: fadeIn 2s ease;
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .cloud-icon { font-size: 3em; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="cloud-icon">☁️</div>
+            <h1>Mi Servicio en la Nube</h1>
+            <p style="font-size: 1.2em; margin-top: 10px;">
+                <span class="badge">GitHub Pages</span>
+                <span class="badge">PaaS</span>
+                <span class="badge">Cloud Computing</span>
+            </p>
+        </div>
+
+        <div class="info-card">
+            <h2>📚 Información del Proyecto</h2>
+            <p><strong>🎓 Estudiante:</strong> Gabriel Ventura</p>
+            <p><strong>🏫 Institución:</strong> Instituto Tecnológico de Las Américas (ITLA)</p>
+            <p><strong>📖 Materia:</strong> Seguridad en la Nube</p>
+            <p><strong>📝 Evaluación:</strong> Primer Parcial</p>
+            <p><strong>📅 Fecha:</strong> Febrero 2026</p>
+        </div>
+
+        <div class="info-card profesor-card">
+            <h2>👨‍🏫 Profesor</h2>
+            <p style="font-size: 1.2em; font-weight: bold;">
+                Raymund Johan Manuel Mejía Mercedes
+            </p>
+        </div>
+
+        <div class="info-grid">
+            <div class="stat-box">
+                <div class="stat-number pulse">100%</div>
+                <p>Disponibilidad</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number pulse">0€</div>
+                <p>Costo Total</p>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number pulse">24/7</div>
+                <p>Acceso Global</p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>🌐 Sobre este Servicio Cloud</h2>
+            <p>Este sitio web está alojado en <strong>GitHub Pages</strong>, demostrando la implementación práctica de servicios en la nube. Es un ejemplo real de computación en la nube accesible y funcional.</p>
+        </div>
+
+        <div class="info-card">
+            <h3>🔧 Modelo de Servicio: PaaS</h3>
+            <p><strong>Platform as a Service (Plataforma como Servicio)</strong></p>
+            <p>GitHub Pages maneja toda la infraestructura de servidores, red, almacenamiento y despliegue automático. Como desarrollador, solo proporciono el código HTML/CSS/JavaScript.</p>
+        </div>
+
+        <div class="info-card">
+            <h2>✨ Características y Ventajas</h2>
+            <ul class="feature-list">
+                <li>✅ <strong>Gratuito:</strong> Sin costo de hosting ni dominio</li>
+                <li>✅ <strong>Deploy Automático:</strong> Actualización instantánea al hacer commit</li>
+                <li>✅ <strong>HTTPS Incluido:</strong> Certificado SSL gratuito y automático</li>
+                <li>✅ <strong>Alta Disponibilidad:</strong> Servidores distribuidos globalmente</li>
+                <li>✅ <strong>Sin Administración:</strong> No requiere configurar ni mantener servidores</li>
+                <li>✅ <strong>Escalabilidad:</strong> Maneja tráfico variable automáticamente</li>
+                <li>✅ <strong>Integración Git:</strong> Control de versiones integrado</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h2>🎯 Modelos de Servicio Cloud</h2>
+            <h3>SaaS - Software as a Service</h3>
+            <p>📧 Ejemplos: Gmail, Dropbox, Salesforce, Microsoft 365</p>
+            
+            <h3>PaaS - Platform as a Service</h3>
+            <p>🚀 Ejemplos: GitHub Pages, Heroku, Google App Engine</p>
+            
+            <h3>IaaS - Infrastructure as a Service</h3>
+            <p>💻 Ejemplos: AWS EC2, Google Cloud, Microsoft Azure</p>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="https://github.com/Gabriel-Ventura/gabriel.github.io" class="btn" target="_blank">
+                📂 Ver Repositorio GitHub
+            </a>
+            <button class="btn" onclick="alert('¡Gracias por visitar mi proyecto de Cloud Computing! 🎉')">
+                💬 Mensaje Interactivo
+            </button>
+        </div>
+
+        <div class="footer">
+            <p>⚡ Desarrollado como proyecto académico para ITLA</p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                🔒 Seguridad en la Nube | Febrero 2026
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Contador de visitas simulado
+        let visitas = Math.floor(Math.random() * 100) + 1;
+        
+        // Efecto de hover en las tarjetas
+        document.querySelectorAll('.info-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderLeft = '5px solid #ffd700';
+            });
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('profesor-card')) {
+                    this.style.borderLeft = 'none';
+                }
+            });
+        });
+
+        // Mensaje de bienvenida
+        console.log('🌟 Bienvenido al proyecto de Cloud Computing de Gabriel Ventura');
+        console.log('📚 Primer Parcial - Seguridad en la Nube - ITLA');
+        console.log('👨‍🏫 Profesor: Raymund Johan Manuel Mejía Mercedes');
+    </script>
+</body>
+</html>
